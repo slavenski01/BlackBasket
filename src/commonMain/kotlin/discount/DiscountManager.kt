@@ -1,5 +1,7 @@
 package discount
 
+import basket.BlackBasketService
+
 /**
  * @author Vyacheslav Kuznetsov
  **/

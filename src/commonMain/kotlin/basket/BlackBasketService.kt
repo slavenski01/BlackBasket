@@ -18,7 +18,7 @@ open class BlackBasketService(private val config: Builder) {
 
         fun discountManager(value: DiscountManager) = apply { discountManager = value }
         fun priceManager(value: PriceManager) = apply { priceManager = value }
-        fun productManager(value: ProductManager) = apply { productManager }
+        fun productManager(value: ProductManager) = apply { productManager = value }
 
         fun build(): BlackBasketService {
             return BlackBasketService(this)
@@ -39,6 +39,10 @@ open class BlackBasketService(private val config: Builder) {
         return price
     }
 
+    /**
+     * Method for getting price with discount
+     * @return return price with discount
+     **/
     open fun getPriceWithDiscount(): Float? {
         var price = 0.0f
 
@@ -48,7 +52,7 @@ open class BlackBasketService(private val config: Builder) {
                     discount.getProductsIdList()?.contains(product.key.getId()) ?: false
                             && discount.isAbsoluteDiscount() == false
                 }
-                ?.forEach { 
+                ?.forEach {
                     price -= (it.getValueMoney() ?: 0.0f) * product.value
                 }
         }
